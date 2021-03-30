@@ -1,6 +1,7 @@
 class JazzVideosController < ApplicationController
     def index
-        videos = JazzVideo.all
+        videos = JazzVideo.get(params[:id], request.path.downcase)
+
         options = {
             include: [:artist]
         }
