@@ -71,3 +71,8 @@ video_29 = JazzVideo.create(vid: "eE_D6Kve1SM", artist_id: 29)
 video_30 = JazzVideo.create(vid: "9QupZbIQkQ0", artist_id: 30)
 video_31 = JazzVideo.create(vid: "Mf_5l1yTKNY", artist_id: 31)
 video_32 = JazzVideo.create(vid: "0GAsHvknO1k", artist_id: 32)
+
+user_1 = User.create(email: "test@g.co", password: "test")
+
+user_jazz_video_1 = UserJazzVideo.create(user_id: 1, jazz_video_id: 15, approved: false)
+user_jazz_video_2 = UserJazzVideo.create(user_id: 1, jazz_video_id: 3, approved: true)
