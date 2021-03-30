@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  jazz_video: one
+  approved: false
+
+two:
+  user: two
+  jazz_video: two
+  approved: false
