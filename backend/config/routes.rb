@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  resources :jazz_videos, only: [:index]
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :users
+  get '/jazz-videos' => 'jazz_videos#index'
+  get '/users/:id/jazz-videos' => 'jazz_videos#index'
+  get '/users/:id/jazz-videos/unseen' => 'jazz_videos#index'
 end
