@@ -21,11 +21,11 @@ if (localStorage.getItem('user')) {
 function renderLoginForm() {
     const form = document.createElement('form');
     form.id = 'login';
-    form.addEventListener('submit', postSession);
+    form.addEventListener('submit', logIn);
     // add form elements
 }
 
-function postSession(e) {
+function logIn(e) {
     const email = e.target.querySelector('input[type=email').value;
     const password = e.target.querySelector('input[type=password]').value;
     fetch(`${backendBaseUrl}sessions`, {
