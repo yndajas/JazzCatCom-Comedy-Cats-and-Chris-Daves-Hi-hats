@@ -7,6 +7,8 @@ if (localStorage.getItem('user')) {
     text.innerText = `Logged in as ${user}`;
     document.addEventListener('DOMContentLoaded', () => {
         document.body.append(text);
+        // remove log in button if present
+        renderLogoutButton();
     })
 } else {
     // render logged out state
@@ -14,18 +16,29 @@ if (localStorage.getItem('user')) {
     text.innerText = `Logged out`;
     document.addEventListener('DOMContentLoaded', () => {
         document.body.append(text);
+        // remove log out form if present
+        renderLoginForm();
     })
-    renderLoginForm();
 }
 
 function renderLoginForm() {
     const form = document.createElement('form');
     form.id = 'login';
     form.addEventListener('submit', logIn);
-    // add form elements
+    const emailInput = document.createElement('input');
+    emailInput.setAttribute('type', 'email');
+    emailInput.setAttribute('placeholder', 'Email');
+    const passwordInput = document.createElement('input');
+    passwordInput.setAttribute('type', 'password');
+    passwordInput.setAttribute('placeholder', 'Password');
+    const submitInput = document.createElement('input');
+    submitInput.setAttribute('type', 'submit');
+    form.append(emailInput, passwordInput, submitInput);
+    document.body.append(form);
 }
 
 function logIn(e) {
+    e.preventDefault();
     const email = e.target.querySelector('input[type=email').value;
     const password = e.target.querySelector('input[type=password]').value;
     fetch(`${backendBaseUrl}sessions`, {
@@ -40,10 +53,22 @@ function logIn(e) {
         })
     })
     .then(response => response.json())
-    .then(json => localStorage.setItem('user', json.user))
+    .then(json => {
+        localStorage.setItem('user', json.user);
+        e.target.remove();
+        renderLogoutButton();
+    })
 }
 
-function logOut() {
+function renderLogoutButton() {
+    const button = document.createElement('button');
+    button.id = 'logout'
+    button.innerText = 'Log out';
+    button.addEventListener('click', logOut);
+    document.body.append(button);
+}
+
+function logOut(e) {
     fetch(`${backendBaseUrl}sessions`, {
         method: 'DELETE',
         headers: {
@@ -53,7 +78,9 @@ function logOut() {
     })
     .then(response => {
         localStorage.removeItem('user');
+        e.target.remove();
         // render login form/anything else of logged out state?
+        renderLoginForm();
     })
 }
 
