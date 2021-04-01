@@ -85,11 +85,11 @@ class App {
     }
 
     register(form) {
-        console.log("register method reached");
+        this.logInOrRegister('register', form);
     }
 
     logIn(form) {
-        this.logInOrRegister('logIn', form)
+        this.logInOrRegister('logIn', form);
     }
 
     logInOrRegister(action, form) {
