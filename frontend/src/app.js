@@ -6,32 +6,41 @@ class App {
 
     renderSessionElements() {
         if (this.user) {
-            this.renderUserInfo();
+            this.renderNavElements();
             this.renderLogoutButton();
+            this.renderUserInfo();
         } else {
-            this.removeUserInfo();
+            this.removeNavElements();
             this.renderSessionControlForm();
+            this.removeUserInfo();
         }
     }
 
-    getUserInfoContainer() {
-        return document.querySelector('div#user-info');
+    getNavElements() {
+        return document.querySelector('ul#nav-elements');
     }
 
-    renderUserInfo() {
-        const container = this.getUserInfoContainer();
-        const p = document.createElement('p');
-        p.innerText = `Logged in as ${this.user}`;
-        container.append(p);
+    renderNavElements() {
+        const elementsContainer = this.getNavElements();
+
+        ["I'm feeling...", "Jazz", "Cats", "Comedy"].forEach(element => {
+            const li = document.createElement('li');
+            li.className = 'nav-item';
+            const a = document.createElement('a');
+            a.className = 'nav-link';
+            a.innerText = element;
+            li.append(a);
+            elementsContainer.append(li);
+        })
     }
 
-    removeUserInfo() {
-        const container = this.getUserInfoContainer();
+    removeNavElements() {
+        const container = this.getNavElements();
         container.innerHTML = "";
     }
 
     getSessionControlContainer() {
-        return document.querySelector('div#session-control');
+        return document.querySelector('ul#session-control');
     }
 
     renderSessionControlForm() {
@@ -51,15 +60,24 @@ class App {
         
         const logInButton = document.createElement('button');
         logInButton.id = 'log-in';
+        logInButton.className = 'btn btn-primary';
         logInButton.innerText = 'Log in';
         logInButton.addEventListener('click', () => this.logIn(form));
 
         const registerButton = document.createElement('button');
         registerButton.id = 'register';
         registerButton.innerText = 'Register';
+        registerButton.className = 'btn btn-success';
         registerButton.addEventListener('click', () => this.register(form));
-        
-        form.append(emailInput, passwordInput, logInButton, registerButton);
+
+        const spaces = [];
+        for (let i = 0; i < 3; i++) {
+            const space = document.createElement('span');
+            space.innerHTML = '&nbsp;';
+            spaces.push(space);
+        }
+
+        form.append(emailInput, spaces[0], passwordInput, spaces[1], logInButton, spaces[2], registerButton);
         
         container.innerHTML = '';
         container.append(form);
@@ -71,10 +89,31 @@ class App {
         const button = document.createElement('button');
         button.id = 'log-out'
         button.innerText = 'Log out';
+        button.className = 'btn btn-primary';
         button.addEventListener('click', e => this.logOut(e));
 
         container.innerHTML = '';
         container.append(button);
+    }
+
+    getUserInfoContainer() {
+        return document.querySelector('ul#user-info');
+    }
+
+    renderUserInfo() {
+        const container = this.getUserInfoContainer();
+        const li = document.createElement('li');
+        li.className = 'nav-item';
+        const span = document.createElement('span');
+        span.className = 'navbar-text';
+        span.innerText = `Logged in as ${this.user}`;
+        li.append(span);
+        container.append(li);
+    }
+
+    removeUserInfo() {
+        const container = this.getUserInfoContainer();
+        container.innerHTML = "";
     }
 
     getEmailAndPassword(form) {
@@ -82,6 +121,18 @@ class App {
             email: form.querySelector('input[type=email').value,
             password: form.querySelector('input[type=password]').value
         }
+    }
+
+    renderCopyright() {
+        const container = document.querySelector('ul#copyright');
+        const li = document.createElement('li');
+        li.className = 'nav-item';
+        const span = document.createElement('span');
+        span.className = 'navbar-text';
+        const year = new Date().getFullYear();
+        span.innerText = `© Ynda Jas ${year}`
+        li.append(span);
+        container.append(li);
     }
 
     register(form) {
@@ -127,4 +178,7 @@ class App {
 }
 
 const app = new App;
-document.addEventListener('DOMContentLoaded', () => app.renderSessionElements());
+document.addEventListener('DOMContentLoaded', () => {
+    app.renderSessionElements();
+    app.renderCopyright();
+});
