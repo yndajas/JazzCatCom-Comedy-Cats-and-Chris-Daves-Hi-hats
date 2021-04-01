@@ -2,13 +2,48 @@
 <html>
     <head>
         <title>JazzCatCom</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap and dependencies -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+        <!-- JazzCatCom styles and scripts -->
+        <link rel="stylesheet" href="src/styles.css">
         <script type="application/javascript" src="src/resources/jazz-video.js" charset="UTF-8"></script>
         <script type="application/javascript" src="src/adapters/jazz-video-adapter.js" charset="UTF-8"></script>
         <script type="application/javascript" src="src/app.js" charset="UTF-8"></script>
     </head>
     <body>
-        <div id='session-control'></div>
-        <div id='user-info'></div>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark">
+                <div class="container">
+                    <!-- <img src="/favicons/android-chrome-512x512.png" alt="tennis and ball logo" title="Racqueteer logo"> -->
+                    <span class="navbar-brand h1">JazzCatCom</span>
+                    <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="navbar-nav mr-auto mt-2" id="nav-elements"></ul>
+                        <ul class="navbar-nav ml-auto mt-2" id='session-control'></ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="container">
+                <h2>~ Comedy, Cats and Chris Dave's Hi-hats ~</h2>
+            </div>
+        </main>
+        <footer>
+            <nav class="navbar navbar-dark">
+                <div class="container">
+                  <ul id='user-info' class="navbar-nav d-none d-sm-block"></ul>
+                  <ul class="navbar-nav" id="copyright"></ul>
+                </div>
+            </nav>
+        </footer>
     </body>
 </html>
 
