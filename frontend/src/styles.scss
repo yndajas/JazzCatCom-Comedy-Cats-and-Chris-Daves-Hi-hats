@@ -73,7 +73,6 @@ input[type=text], input[type=email], input[type=password], input[type=submit], b
     &:not(input[type=submit]):not(button) {
         width: 120px;
         border: 0;
-        // border: 2px solid $base-secondary;
     }
 }
 
