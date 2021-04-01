@@ -10,7 +10,7 @@ class App {
             this.renderLogoutButton();
         } else {
             this.removeUserInfo();
-            this.renderLoginForm();
+            this.renderSessionControlForm();
         }
     }
 
@@ -34,12 +34,12 @@ class App {
         return document.querySelector('div#session-control');
     }
 
-    renderLoginForm() {
+    renderSessionControlForm() {
         const container = this.getSessionControlContainer();
 
         const form = document.createElement('form');
-        form.id = 'login';
-        form.addEventListener('submit', e => this.logIn(e));
+        form.id = 'session-control';
+        form.addEventListener('submit', (e) => e.preventDefault())
 
         const emailInput = document.createElement('input');
         emailInput.setAttribute('type', 'email');
@@ -49,10 +49,17 @@ class App {
         passwordInput.setAttribute('type', 'password');
         passwordInput.setAttribute('placeholder', 'Password');
         
-        const submitInput = document.createElement('input');
-        submitInput.setAttribute('type', 'submit');
+        const logInButton = document.createElement('button');
+        logInButton.id = 'log-in';
+        logInButton.innerText = 'Log in';
+        logInButton.addEventListener('click', () => this.logIn(form));
+
+        const registerButton = document.createElement('button');
+        registerButton.id = 'register';
+        registerButton.innerText = 'Register';
+        registerButton.addEventListener('click', () => this.register(form));
         
-        form.append(emailInput, passwordInput, submitInput);
+        form.append(emailInput, passwordInput, logInButton, registerButton);
         
         container.innerHTML = '';
         container.append(form);
@@ -62,7 +69,7 @@ class App {
         const container = this.getSessionControlContainer();
 
         const button = document.createElement('button');
-        button.id = 'logout'
+        button.id = 'log-out'
         button.innerText = 'Log out';
         button.addEventListener('click', e => this.logOut(e));
 
@@ -70,20 +77,30 @@ class App {
         container.append(button);
     }
 
-    logIn(e) {
-        e.preventDefault();
-        const email = e.target.querySelector('input[type=email').value;
-        const password = e.target.querySelector('input[type=password]').value;
-        fetch(`${this.backendBaseUrl}sessions`, {
+    getEmailAndPassword(form) {
+        return {
+            email: form.querySelector('input[type=email').value,
+            password: form.querySelector('input[type=password]').value
+        }
+    }
+
+    register(form) {
+        console.log("register method reached");
+    }
+
+    logIn(form) {
+        this.logInOrRegister('logIn', form)
+    }
+
+    logInOrRegister(action, form) {
+        const path = (action === 'register') ? 'users' : 'sessions';
+        fetch(`${this.backendBaseUrl}${path}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },        
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
+            body: JSON.stringify(this.getEmailAndPassword(form))
         })
         .then(response => response.json())
         .then(json => {
