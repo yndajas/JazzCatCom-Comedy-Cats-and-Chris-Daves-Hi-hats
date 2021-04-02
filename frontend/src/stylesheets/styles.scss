@@ -56,10 +56,27 @@ footer {
 }
 
 nav.navbar {
+    img {
+        max-height: 75px;
+        padding: 10px 0px;
+        margin-right: 20px;    
+    }
+
     span.navbar-brand.h1 {
         font-size: 2.5rem;
-        color: $base-dark;
         margin-bottom: 0;
+
+        span.jazz {
+            color: rgba(210, 46, 41, 0.75);
+        }
+
+        span.cat {
+            color: rgba(247, 144, 30, 0.75);
+        }
+
+        span.com {
+            color: rgba(77, 109, 180, 0.75);
+        }
     }
 }
 

@@ -37,10 +37,19 @@ footer {
     .container {
       padding: 0; } }
 
+nav.navbar img {
+  max-height: 75px;
+  padding: 10px 0px;
+  margin-right: 20px; }
 nav.navbar span.navbar-brand.h1 {
   font-size: 2.5rem;
-  color: #453523;
   margin-bottom: 0; }
+  nav.navbar span.navbar-brand.h1 span.jazz {
+    color: rgba(210, 46, 41, 0.75); }
+  nav.navbar span.navbar-brand.h1 span.cat {
+    color: rgba(247, 144, 30, 0.75); }
+  nav.navbar span.navbar-brand.h1 span.com {
+    color: rgba(77, 109, 180, 0.75); }
 
 input[type=text], input[type=email], input[type=password], input[type=submit], button {
   padding: 6px 12px;
