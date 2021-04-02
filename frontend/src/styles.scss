@@ -1,7 +1,7 @@
-$base-dark: #2D2D2D;
-$base-accent: #D32F2F;
-$base-secondary: #BFBFBF;
-$base-light: #F8F9FA;
+$base-dark: #453523;
+$base-accent: #F7DF02;
+$base-secondary: #9C9386;
+$base-light: #EAE3C9;
 
 html {
     position: relative;
@@ -19,9 +19,9 @@ body {
 }
 
 header {
-    padding: 10px 0px;
-    background-color: $base-dark;
-    border-bottom: 1px solid $base-secondary;
+    padding: 0;
+    background-color: $base-accent;
+    border-bottom: 1px solid $base-dark;
 
     ul#nav-elements li {
         cursor: pointer;
@@ -41,8 +41,8 @@ footer {
     bottom: 0;
     width: 100%;
     height: 60px;
-    background-color: $base-dark;
-    border-top: 1px solid $base-secondary;
+    background-color: $base-accent;
+    border-top: 1px solid $base-dark;
 }
 
 .container {
@@ -58,7 +58,7 @@ footer {
 nav.navbar {
     span.navbar-brand.h1 {
         font-size: 2.5rem;
-        color: $base-light;
+        color: $base-dark;
         margin-bottom: 0;
     }
 }

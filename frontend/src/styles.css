@@ -4,15 +4,15 @@ html {
 
 body {
   padding-bottom: 60px;
-  background-color: #F8F9FA;
-  color: #2D2D2D; }
+  background-color: #EAE3C9;
+  color: #453523; }
   body .h1, body .h2, body .h3, body .h4, body .h5, body .h6, body h1, body h2, body h3, body h4, body h5, body h6 {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Semibold", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
 
 header {
-  padding: 10px 0px;
-  background-color: #2D2D2D;
-  border-bottom: 1px solid #BFBFBF; }
+  padding: 0;
+  background-color: #F7DF02;
+  border-bottom: 1px solid #453523; }
   header ul#nav-elements li {
     cursor: pointer; }
 
@@ -26,8 +26,8 @@ footer {
   bottom: 0;
   width: 100%;
   height: 60px;
-  background-color: #2D2D2D;
-  border-top: 1px solid #BFBFBF; }
+  background-color: #F7DF02;
+  border-top: 1px solid #453523; }
 
 .container {
   margin: 0;
@@ -39,7 +39,7 @@ footer {
 
 nav.navbar span.navbar-brand.h1 {
   font-size: 2.5rem;
-  color: #F8F9FA;
+  color: #453523;
   margin-bottom: 0; }
 
 input[type=text], input[type=email], input[type=password], input[type=submit], button {
