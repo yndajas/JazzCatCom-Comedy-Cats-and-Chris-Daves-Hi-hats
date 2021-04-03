@@ -17,12 +17,12 @@ class App {
         this.renderNavElements();
         this.renderLogoutButton();
         this.renderUserInfo();
-        // I'm feeling landing view
+        this.renderImFeeling();
     }
 
     renderLoggedOutElements() {
         this.renderSessionControlForm();
-        // about view
+        this.renderAbout();
     }
 
     getNavElements() {
@@ -32,15 +32,24 @@ class App {
     renderNavElements() {
         const elementsContainer = this.getNavElements();
 
-        ["I'm feeling...", "Jazz", "Cats", "Comedy"].forEach(element => {
+        const lis = ["I'm feeling...", "Jazz", "Cats", "Comedy"].map(element => {
             const li = document.createElement('li');
             li.className = 'nav-item';
             const a = document.createElement('a');
             a.className = 'nav-link';
             a.innerText = element;
             li.append(a);
-            elementsContainer.append(li);
+            return li;
         })
+
+        lis[0].addEventListener('click', () => this.renderImFeeling());
+        lis[1].addEventListener('click', () => console.log("render jazz"))
+        lis[2].addEventListener('click', () => console.log("render cats"))
+        lis[3].addEventListener('click', () => console.log("render comedy"))
+
+        for (const li of lis) {
+            elementsContainer.append(li);
+        }
     }
 
     removeNavElements() {
@@ -99,7 +108,7 @@ class App {
         button.id = 'log-out'
         button.innerText = 'Log out';
         button.className = 'btn btn-primary';
-        button.addEventListener('click', e => this.logOut(e));
+        button.addEventListener('click', () => this.logOut());
 
         container.innerHTML = '';
         container.append(button);
@@ -135,6 +144,20 @@ class App {
         span.innerText = `© Ynda Jas ${year}`
         li.append(span);
         container.append(li);
+    }
+
+    getMainContentContainer() {
+        return document.querySelector('div#content');
+    }
+
+    renderAbout() {
+        const container = this.getMainContentContainer();
+        container.innerHTML = "About";
+    }
+
+    renderImFeeling() {
+        const container = this.getMainContentContainer();
+        container.innerHTML = "I'm feeling";
     }
 
     getEmailAndPassword(form) {
@@ -174,7 +197,7 @@ class App {
         })
     }
 
-    logOut(e) {
+    logOut() {
         fetch(`${this.backendBaseUrl}sessions`, {
             method: 'DELETE',
             headers: {
