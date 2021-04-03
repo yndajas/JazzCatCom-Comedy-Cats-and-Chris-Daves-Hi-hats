@@ -4,16 +4,25 @@ class App {
         this.backendBaseUrl = 'http://localhost:3000/';
     }
 
-    renderSessionElements() {
+    renderInitialState() {
+        this.renderCopyright();
         if (this.user) {
-            this.renderNavElements();
-            this.renderLogoutButton();
-            this.renderUserInfo();
+            this.renderLoggedInElements();
         } else {
-            this.removeNavElements();
-            this.renderSessionControlForm();
-            this.removeUserInfo();
+            this.renderLoggedOutElements();
         }
+    }
+
+    renderLoggedInElements() {
+        this.renderNavElements();
+        this.renderLogoutButton();
+        this.renderUserInfo();
+        // I'm feeling landing view
+    }
+
+    renderLoggedOutElements() {
+        this.renderSessionControlForm();
+        // about view
     }
 
     getNavElements() {
@@ -116,13 +125,6 @@ class App {
         container.innerHTML = "";
     }
 
-    getEmailAndPassword(form) {
-        return {
-            email: form.querySelector('input[type=email').value,
-            password: form.querySelector('input[type=password]').value
-        }
-    }
-
     renderCopyright() {
         const container = document.querySelector('ul#copyright');
         const li = document.createElement('li');
@@ -133,6 +135,13 @@ class App {
         span.innerText = `© Ynda Jas ${year}`
         li.append(span);
         container.append(li);
+    }
+
+    getEmailAndPassword(form) {
+        return {
+            email: form.querySelector('input[type=email').value,
+            password: form.querySelector('input[type=password]').value
+        }
     }
 
     register(form) {
@@ -160,7 +169,7 @@ class App {
             } else {
                 localStorage.setItem('user', json.user);
                 this.user = json.user;
-                this.renderSessionElements();    
+                this.renderLoggedInElements();
             }
         })
     }
@@ -176,13 +185,14 @@ class App {
         .then(response => {
             localStorage.removeItem('user');
             this.user = null;
-            this.renderSessionElements();
+            this.removeNavElements();
+            this.removeUserInfo();
+            this.renderLoggedOutElements();
         })
     }
 }
 
 const app = new App;
 document.addEventListener('DOMContentLoaded', () => {
-    app.renderSessionElements();
-    app.renderCopyright();
+    app.renderInitialState();
 });
