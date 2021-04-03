@@ -155,11 +155,14 @@ class App {
         })
         .then(response => response.json())
         .then(json => {
-            localStorage.setItem('user', json.user);
-            this.user = json.user;
-            this.renderSessionElements();
+            if (json.error) {
+                window.alert(json.error);
+            } else {
+                localStorage.setItem('user', json.user);
+                this.user = json.user;
+                this.renderSessionElements();    
+            }
         })
-        // error handling with .catch - need to work out how to send back error message with correct error header
     }
 
     logOut(e) {

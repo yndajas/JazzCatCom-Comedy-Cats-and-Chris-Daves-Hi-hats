@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         render json: {user: user.email}
     else
-      # error
+      render json: {error: "Incorrect email and/or password"}, status: 401
     end
   end
 
