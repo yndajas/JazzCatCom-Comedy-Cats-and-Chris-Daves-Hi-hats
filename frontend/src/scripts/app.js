@@ -88,12 +88,7 @@ class App {
         registerButton.className = 'btn btn-success';
         registerButton.addEventListener('click', () => this.register(form));
 
-        const spaces = [];
-        for (let i = 0; i < 3; i++) {
-            const space = document.createElement('span');
-            space.innerHTML = '&nbsp;';
-            spaces.push(space);
-        }
+        const spaces = App.createSpaces(3);
 
         form.append(emailInput, spaces[0], passwordInput, spaces[1], logInButton, spaces[2], registerButton);
         
@@ -157,7 +152,34 @@ class App {
 
     renderImFeeling() {
         const container = this.getMainContentContainer();
-        container.innerHTML = "I'm feeling";
+        
+        const h3 = document.createElement('h3');
+        h3.innerText = "I'm feeling...";
+
+        const br = document.createElement('br');
+
+        const button1 = document.createElement('button');
+        button1.id = 'feeling-jazzy'
+        button1.className = 'btn im-feeling';
+        button1.innerText = "🎹 Jazzy 🎷";
+        button1.addEventListener('click', () => console.log("Jazzy"));
+        
+        const button2 = document.createElement('button');
+        button2.id = 'feeling-catty'
+        button2.className = 'btn im-feeling';
+        button2.innerText = "🐱 Catty 🐈";
+        button2.addEventListener('click', () => console.log("Catty"));
+
+        const button3 = document.createElement('button');
+        button3.id = 'feeling-jokey'
+        button3.className = 'btn im-feeling';
+        button3.innerText = "😆 Jokey 😂";
+        button3.addEventListener('click', () => console.log("Jokey"));
+
+        const spaces = App.createSpaces(2);
+
+        container.innerHTML = '';
+        container.append(h3, br, button1, spaces[0], button2, spaces[1], button3);
     }
 
     getEmailAndPassword(form) {
@@ -212,6 +234,16 @@ class App {
             this.removeUserInfo();
             this.renderLoggedOutElements();
         })
+    }
+
+    static createSpaces(n) {
+        const spaces = [];
+        for (let i = 0; i < n; i++) {
+            const space = document.createElement('span');
+            space.innerHTML = '&nbsp;';
+            spaces.push(space);
+        }
+        return spaces;
     }
 }
 
