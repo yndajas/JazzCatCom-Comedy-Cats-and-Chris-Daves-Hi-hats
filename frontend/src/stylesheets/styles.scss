@@ -2,6 +2,10 @@ $base-dark: #453523;
 $base-accent: #F7DF02;
 $base-secondary: #9C9386;
 $base-light: #EAE3C9;
+$base-jazz: rgba(210, 46, 41, 0.75);
+$base-cat: rgba(247, 144, 30, 0.75);
+$base-comedy: rgba(77, 109, 180, 0.75);
+
 
 html {
     position: relative;
@@ -30,9 +34,10 @@ header {
 
 main {
     padding: 20px 0px;
+    text-align: center;
 
-    h2 {
-        text-align: center;
+    div#content {
+        margin: 0 auto; // may not be needed
     }
 }
 
@@ -67,15 +72,15 @@ nav.navbar {
         margin-bottom: 0;
 
         span.jazz {
-            color: rgba(210, 46, 41, 0.75);
+            color: $base-jazz;
         }
 
         span.cat {
-            color: rgba(247, 144, 30, 0.75);
+            color: $base-cat;
         }
 
         span.com {
-            color: rgba(77, 109, 180, 0.75);
+            color: $base-comedy;
         }
     }
 }
@@ -90,6 +95,25 @@ input[type=text], input[type=email], input[type=password], input[type=submit], b
     &:not(input[type=submit]):not(button) {
         width: 120px;
         border: 0;
+    }
+}
+
+button.im-feeling {
+    height: 50px;
+    width: 150px;
+    font-weight: bold;
+    color: $base-light;
+
+    &#feeling-jazzy {
+        background-color: $base-jazz;
+    }
+
+    &#feeling-catty {
+        background-color: $base-cat;
+    }
+
+    &#feeling-jokey {
+        background-color: $base-comedy;
     }
 }
 

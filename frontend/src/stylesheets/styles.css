@@ -17,9 +17,10 @@ header {
     cursor: pointer; }
 
 main {
-  padding: 20px 0px; }
-  main h2 {
-    text-align: center; }
+  padding: 20px 0px;
+  text-align: center; }
+  main div#content {
+    margin: 0 auto; }
 
 footer {
   position: absolute;
@@ -60,6 +61,18 @@ input[type=text], input[type=email], input[type=password], input[type=submit], b
   input[type=text]:not(input[type=submit]):not(button), input[type=email]:not(input[type=submit]):not(button), input[type=password]:not(input[type=submit]):not(button), input[type=submit]:not(input[type=submit]):not(button), button:not(input[type=submit]):not(button) {
     width: 120px;
     border: 0; }
+
+button.im-feeling {
+  height: 50px;
+  width: 150px;
+  font-weight: bold;
+  color: #EAE3C9; }
+  button.im-feeling#feeling-jazzy {
+    background-color: rgba(210, 46, 41, 0.75); }
+  button.im-feeling#feeling-catty {
+    background-color: rgba(247, 144, 30, 0.75); }
+  button.im-feeling#feeling-jokey {
+    background-color: rgba(77, 109, 180, 0.75); }
 
 form#sesssion-control {
   display: flex;
