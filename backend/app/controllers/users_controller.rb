@@ -5,7 +5,7 @@ class UsersController < ApplicationController
         else
             user = User.create(email: params[:email], password: params[:password])
             session[:user_id] = user.id
-            render json: {user: user.email}
+            render json: {user: {id: user.id, email: user.email}}
         end        
     end
 end
