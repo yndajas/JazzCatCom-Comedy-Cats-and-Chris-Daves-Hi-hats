@@ -1,12 +1,13 @@
 class App {
     constructor() {
-        this.user = localStorage.getItem('user');
+        this.userId = localStorage.getItem('userId');
+        this.userEmail = localStorage.getItem('userEmail');
         this.backendBaseUrl = 'http://localhost:3000/';
     }
 
     renderInitialState() {
         this.renderCopyright();
-        if (this.user) {
+        if (this.userId) {
             this.renderLoggedInElements();
         } else {
             this.renderLoggedOutElements();
@@ -119,7 +120,7 @@ class App {
         li.className = 'nav-item';
         const span = document.createElement('span');
         span.className = 'navbar-text';
-        span.innerText = `Logged in as ${this.user}`;
+        span.innerText = `Logged in as ${this.userEmail}`;
         li.append(span);
         container.append(li);
     }
@@ -145,14 +146,25 @@ class App {
         return document.querySelector('div#content');
     }
 
-    renderAbout() {
+    updateMainContentContainer(newContent, setOrApend) {
         const container = this.getMainContentContainer();
-        container.innerHTML = "About";
+        if (setOrApend === 'set') {
+            container.innerHTML = newContent;
+        } else {
+            container.innerHTML = '';
+            if (Array.isArray(newContent)) {
+                container.append(...newContent);
+            } else {
+                container.append(newContent);
+            }
+        }
     }
 
-    renderImFeeling() {
-        const container = this.getMainContentContainer();
-        
+    renderAbout() {
+        this.updateMainContentContainer("About", 'set');
+    }
+
+    renderImFeeling() {        
         const h3 = document.createElement('h3');
         h3.innerText = "I'm feeling...";
 
@@ -162,7 +174,18 @@ class App {
         button1.id = 'feeling-jazzy'
         button1.className = 'btn im-feeling';
         button1.innerText = "🎹 Jazzy 🎷";
-        button1.addEventListener('click', () => console.log("Jazzy"));
+        button1.addEventListener('click', () => {
+            JazzVideoAdapter.getUnseenVideos(this.userId)
+            .then(response => response.json())
+            .then(json => {
+                const videoOrError = JazzVideo.newFromJson(json);
+                if (typeof(videoOrError) !== 'string') {
+                    this.updateMainContentContainer(videoOrError.htmlElements, 'append');
+                } else {
+                    this.updateMainContentContainer(videoOrError, 'set')
+                }
+            })
+        })
         
         const button2 = document.createElement('button');
         button2.id = 'feeling-catty'
@@ -178,8 +201,8 @@ class App {
 
         const spaces = App.createSpaces(2);
 
-        container.innerHTML = '';
-        container.append(h3, br, button1, spaces[0], button2, spaces[1], button3);
+        const newContent = [h3, br, button1, spaces[0], button2, spaces[1], button3];
+        this.updateMainContentContainer(newContent, 'append');
     }
 
     getEmailAndPassword(form) {
@@ -212,8 +235,10 @@ class App {
             if (json.error) {
                 window.alert(json.error);
             } else {
-                localStorage.setItem('user', json.user);
-                this.user = json.user;
+                this.userId = json.user.id;
+                this.userEmail = json.user.email;
+                localStorage.setItem('userId', this.userId);
+                localStorage.setItem('userEmail', this.userEmail);
                 this.renderLoggedInElements();
             }
         })
@@ -228,7 +253,8 @@ class App {
             }
         })
         .then(response => {
-            localStorage.removeItem('user');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userEmail');
             this.user = null;
             this.removeNavElements();
             this.removeUserInfo();
