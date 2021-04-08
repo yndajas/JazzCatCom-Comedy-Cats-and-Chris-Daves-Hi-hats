@@ -5,7 +5,7 @@ class JazzVideo {
         this.artistName = artistName;
     }
 
-    get htmlElements() {
+    htmlElements(app) {
         const div = document.createElement('div');
         div.className = 'embed-responsive embed-responsive-16by9 iframe_container';
         div.id = 'jazz-video-container';
@@ -23,13 +23,19 @@ class JazzVideo {
         approveButton.id = 'approve'
         approveButton.className = 'btn btn-success';
         approveButton.innerText = "Saxy";
-        approveButton.addEventListener('click', () => console.log('approve'))
+        approveButton.addEventListener('click', () => {
+            JazzVideoAdapter.saveVideo(app.userId, this.id, 'approve')
+            .then(() => app.renderJazzVideo())
+        })
 
         const rejectButton = document.createElement('button');
         rejectButton.id = 'reject'
         rejectButton.className = 'btn btn-danger';
         rejectButton.innerText = "PiaNO thank you";
-        rejectButton.addEventListener('click', () => console.log('reject'))
+        rejectButton.addEventListener('click', () => {
+            JazzVideoAdapter.saveVideo(app.userId, this.id, 'reject')
+            .then(() => app.renderJazzVideo())
+        })
 
         const br = document.createElement('br');
         const spaces = App.createSpaces(1);
@@ -46,7 +52,7 @@ class JazzVideo {
         if (count === 0) {
             return "No unseen videos";
         } else {
-            const index = Math.round(Math.random() * (count - 1) + 1);
+            const index = Math.round(Math.random() * (count - 1));
             const videoData = json.data[index];
             const id = videoData.id;
             const vid = videoData.attributes.vid;
