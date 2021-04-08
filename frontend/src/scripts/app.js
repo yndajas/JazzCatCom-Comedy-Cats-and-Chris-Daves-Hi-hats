@@ -174,18 +174,7 @@ class App {
         button1.id = 'feeling-jazzy'
         button1.className = 'btn im-feeling';
         button1.innerText = "🎹 Jazzy 🎷";
-        button1.addEventListener('click', () => {
-            JazzVideoAdapter.getUnseenVideos(this.userId)
-            .then(response => response.json())
-            .then(json => {
-                const videoOrError = JazzVideo.newFromJson(json);
-                if (typeof(videoOrError) !== 'string') {
-                    this.updateMainContentContainer(videoOrError.htmlElements, 'append');
-                } else {
-                    this.updateMainContentContainer(videoOrError, 'set')
-                }
-            })
-        })
+        button1.addEventListener('click', () => this.renderJazzVideo());
         
         const button2 = document.createElement('button');
         button2.id = 'feeling-catty'
@@ -203,6 +192,19 @@ class App {
 
         const newContent = [h3, br, button1, spaces[0], button2, spaces[1], button3];
         this.updateMainContentContainer(newContent, 'append');
+    }
+
+    renderJazzVideo() {
+        JazzVideoAdapter.getUnseenVideos(this.userId)
+        .then(response => response.json())
+        .then(json => {
+            const videoOrError = JazzVideo.newFromJson(json);
+            if (typeof(videoOrError) !== 'string') {
+                this.updateMainContentContainer(videoOrError.htmlElements(this), 'append');
+            } else {
+                this.updateMainContentContainer(videoOrError, 'set')
+            }
+        })
     }
 
     getEmailAndPassword(form) {
