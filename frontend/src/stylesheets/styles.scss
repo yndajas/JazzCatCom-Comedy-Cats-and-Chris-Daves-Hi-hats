@@ -98,6 +98,11 @@ input[type=text], input[type=email], input[type=password], input[type=submit], b
     }
 }
 
+form#sesssion-control {
+    display: flex;
+    align-items: center;
+}
+
 button.im-feeling {
     height: 50px;
     width: 150px;
@@ -117,11 +122,12 @@ button.im-feeling {
     }
 }
 
-form#sesssion-control {
-    display: flex;
-    align-items: center;
+div#jazz-video-container {
+    max-width: 90vh;
+    margin: 0 auto;
 }
 
+// check what this is for
 label {
     font-weight: bold;
 }
