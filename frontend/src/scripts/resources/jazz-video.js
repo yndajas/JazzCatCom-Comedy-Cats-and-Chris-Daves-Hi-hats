@@ -6,13 +6,35 @@ class JazzVideo {
     }
 
     get htmlElements() {
-        const urlP = document.createElement('p');
-        urlP.innerText = this.url;
+        const div = document.createElement('div');
+        div.className = 'embed-responsive embed-responsive-16by9 iframe_container';
+        div.id = 'jazz-video-container';
 
-        const artistP = document.createElement('p');
-        artistP.innerText = this.artistName;
+        const iframe = document.createElement('iframe');
+        iframe.className = 'embed-responsive-item';
+        iframe.setAttribute('src', `${JazzVideo.ytBaseUrl}${this.vid}`);
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', 'allowfullscreen');
 
-        return [urlP, artistP];
+        div.append(iframe);
+
+        const approveButton = document.createElement('button');
+        approveButton.id = 'approve'
+        approveButton.className = 'btn btn-success';
+        approveButton.innerText = "Saxy";
+        approveButton.addEventListener('click', () => console.log('approve'))
+
+        const rejectButton = document.createElement('button');
+        rejectButton.id = 'reject'
+        rejectButton.className = 'btn btn-danger';
+        rejectButton.innerText = "PiaNO thank you";
+        rejectButton.addEventListener('click', () => console.log('reject'))
+
+        const br = document.createElement('br');
+        const spaces = App.createSpaces(1);
+
+        return [div, br, approveButton, spaces[0], rejectButton];
     }
 
     get url() {
@@ -36,6 +58,6 @@ class JazzVideo {
     }
 
     static get ytBaseUrl() {
-        return 'https://www.youtube.com/watch?v=';
+        return 'https://www.youtube.com/embed/';
     }
 }
