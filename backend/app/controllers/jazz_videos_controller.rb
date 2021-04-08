@@ -7,4 +7,9 @@ class JazzVideosController < ApplicationController
         }
         render json: JazzVideoSerializer.new(videos, options)
     end
+
+    # actually creates a UserJazzVideo record
+    def create
+        UserJazzVideo.approve_or_reject(params[:id], params[:vid], params[:approveOrReject])
+    end
 end
