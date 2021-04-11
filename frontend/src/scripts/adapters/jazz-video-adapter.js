@@ -4,7 +4,12 @@ class JazzVideoAdapter {
     }
 
     static async getUnseenVideos(userId) {
-        let response = await fetch(`${JazzVideoAdapter.backendBaseUrl}users/${userId}/jazz-videos/unseen`)
+        let response = await fetch(`${JazzVideoAdapter.backendBaseUrl}users/${userId}/jazz-videos/unseen`);
+        return await response;
+    }
+
+    static async getApprovedVideos(userId) {
+        let response = await fetch(`${JazzVideoAdapter.backendBaseUrl}users/${userId}/jazz-videos`);
         return await response;
     }
 
@@ -16,8 +21,7 @@ class JazzVideoAdapter {
                 'Accept': 'application/json'
             },        
             body: JSON.stringify({vid, approveOrReject})
-        })
+        });
         return await response;
-        // console.log(`${userId}, ${vid}, ${approveOrReject}`);
     }
 }
