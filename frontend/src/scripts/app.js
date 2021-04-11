@@ -44,7 +44,21 @@ class App {
         })
 
         lis[0].addEventListener('click', () => this.renderImFeeling());
-        lis[1].addEventListener('click', () => console.log("render jazz"))
+        lis[1].addEventListener('click', () => {
+            JazzVideoAdapter.getApprovedVideos(this.userId)
+            .then(response => response.json())
+            .then(json => {
+                const videosOrError = JazzVideo.allApprovedFromJson(json);
+                if (typeof(videosOrError) !== 'string') {
+                    const videosHtmlElements = videosOrError.map(video => video.htmlElements(this, false));
+                    const videosOuterHtml = videosHtmlElements.map(element => element.outerHTML);
+                    const videosOuterHtmlWithBrs = videosOuterHtml.join(document.createElement('br').outerHTML);
+                    this.updateMainContentContainer(videosOuterHtmlWithBrs, 'set');
+                } else {
+                    this.updateMainContentContainer(videosOrError, 'set')
+                }
+            })
+        })
         lis[2].addEventListener('click', () => console.log("render cats"))
         lis[3].addEventListener('click', () => console.log("render comedy"))
 
@@ -174,7 +188,7 @@ class App {
         button1.id = 'feeling-jazzy'
         button1.className = 'btn im-feeling';
         button1.innerText = "🎹 Jazzy 🎷";
-        button1.addEventListener('click', () => this.renderJazzVideo());
+        button1.addEventListener('click', () => this.renderUnseenJazzVideo());
         
         const button2 = document.createElement('button');
         button2.id = 'feeling-catty'
@@ -194,11 +208,11 @@ class App {
         this.updateMainContentContainer(newContent, 'append');
     }
 
-    renderJazzVideo() {
+    renderUnseenJazzVideo() {
         JazzVideoAdapter.getUnseenVideos(this.userId)
         .then(response => response.json())
         .then(json => {
-            const videoOrError = JazzVideo.newFromJson(json);
+            const videoOrError = JazzVideo.randomUnseenFromJson(json);
             if (typeof(videoOrError) !== 'string') {
                 this.updateMainContentContainer(videoOrError.htmlElements(this), 'append');
             } else {
