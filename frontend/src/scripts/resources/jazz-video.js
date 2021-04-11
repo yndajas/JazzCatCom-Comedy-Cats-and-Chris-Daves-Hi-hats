@@ -5,7 +5,7 @@ class JazzVideo {
         this.artistName = artistName;
     }
 
-    htmlElements(app) {
+    htmlElements(app, forApproval = true) {
         const div = document.createElement('div');
         div.className = 'embed-responsive embed-responsive-16by9 iframe_container';
         div.id = 'jazz-video-container';
@@ -19,13 +19,22 @@ class JazzVideo {
 
         div.append(iframe);
 
+        if (forApproval) {
+            return this.htmlElementsForApproval(div, app);
+        } else {
+            return div;
+            // might want to add a delete button here (and refactor into a deparate method if so)
+        }
+    }
+
+    htmlElementsForApproval(div, app) {
         const approveButton = document.createElement('button');
         approveButton.id = 'approve'
         approveButton.className = 'btn btn-success';
         approveButton.innerText = "Saxy";
         approveButton.addEventListener('click', () => {
             JazzVideoAdapter.saveVideo(app.userId, this.id, 'approve')
-            .then(() => app.renderJazzVideo())
+            .then(() => app.renderUnseenJazzVideo())
         })
 
         const rejectButton = document.createElement('button');
@@ -34,7 +43,7 @@ class JazzVideo {
         rejectButton.innerText = "PiaNO thank you";
         rejectButton.addEventListener('click', () => {
             JazzVideoAdapter.saveVideo(app.userId, this.id, 'reject')
-            .then(() => app.renderJazzVideo())
+            .then(() => app.renderUnseenJazzVideo())
         })
 
         const br = document.createElement('br');
@@ -47,20 +56,40 @@ class JazzVideo {
         return `${JazzVideo.ytBaseUrl}${this.vid}`
     }
 
-    static newFromJson(json) {
+    static allApprovedFromJson(json) {
+        const count = json.data.length;
+        if (count === 0) {
+            return "No unseen videos";
+        } else {
+            return json.data.map(videoData => JazzVideo.newFromVideoDataAndIncluded(videoData, json.included))
+        }
+
+    }
+
+    static randomUnseenFromJson(json) {
         const count = json.data.length;
         if (count === 0) {
             return "No unseen videos";
         } else {
             const index = Math.round(Math.random() * (count - 1));
             const videoData = json.data[index];
-            const id = videoData.id;
-            const vid = videoData.attributes.vid;
-            const artistId = videoData.relationships.artist.data.id;
-            const artist = json.included.find(artist => artist.id === artistId);
-            const artistName = artist.attributes.name;
-            return new JazzVideo(id, vid, artistName);
+            return JazzVideo.newFromVideoDataAndIncluded(videoData, json.included);
         }
+    }
+
+    static newFromVideoDataAndIncluded(videoData, included) {
+        const {id, vid, artistId} = JazzVideo.getAttributesFromVideoData(videoData);
+        const artistName = JazzVideo.getArtistNameFromIncludedById(artistId, included);
+        return new JazzVideo(id, vid, artistName);
+    }
+
+    static getAttributesFromVideoData(videoData) {
+        return {id: videoData.id, vid: videoData.attributes.vid, artistId: videoData.relationships.artist.data.id};
+    }
+
+    static getArtistNameFromIncludedById(id, included) {
+        const artist = included.find(artist => artist.id === id);
+        return artist.attributes.name;
     }
 
     static get ytBaseUrl() {
