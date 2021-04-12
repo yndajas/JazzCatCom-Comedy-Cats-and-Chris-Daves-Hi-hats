@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_141005) do
+ActiveRecord::Schema.define(version: 2021_04_12_184952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2021_04_12_141005) do
     t.index ["artist_id"], name: "index_jazz_videos_on_artist_id"
   end
 
+  create_table "jokes", force: :cascade do |t|
+    t.integer "external_api_id"
+    t.string "type"
+    t.string "setup"
+    t.string "punchline"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_cats", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "cat_id"
@@ -55,6 +64,16 @@ ActiveRecord::Schema.define(version: 2021_04_12_141005) do
     t.index ["user_id"], name: "index_user_jazz_videos_on_user_id"
   end
 
+  create_table "user_jokes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "joke_id"
+    t.boolean "approved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["joke_id"], name: "index_user_jokes_on_joke_id"
+    t.index ["user_id"], name: "index_user_jokes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -66,4 +85,6 @@ ActiveRecord::Schema.define(version: 2021_04_12_141005) do
   add_foreign_key "user_cats", "users"
   add_foreign_key "user_jazz_videos", "jazz_videos"
   add_foreign_key "user_jazz_videos", "users"
+  add_foreign_key "user_jokes", "jokes"
+  add_foreign_key "user_jokes", "users"
 end
