@@ -5,6 +5,14 @@ class JazzVideo {
         this.artistName = artistName;
     }
 
+    static randomUrl(userId) {
+        return `${App.backendBaseUrl}users/${userId}/jazz-videos/unseen`;
+    }
+
+    static get resource() {
+        return "jazz-videos";
+    }
+
     htmlElements(app, forApproval = true) {
         const div = document.createElement('div');
         div.className = 'embed-responsive embed-responsive-16by9 iframe_container resource-container';
@@ -32,7 +40,7 @@ class JazzVideo {
         approveButton.className = 'btn btn-success';
         approveButton.innerText = "Saxy";
         approveButton.addEventListener('click', () => {
-            JazzVideoAdapter.save(app.userId, this.vid, 'approve')
+            Adapter.save(JazzVideo, app.userId, this.vid, 'approve')
             .then(() => app.renderUnseenJazzVideo())
         })
 
@@ -41,7 +49,7 @@ class JazzVideo {
         rejectButton.className = 'btn btn-danger';
         rejectButton.innerText = "PiaNO thank you";
         rejectButton.addEventListener('click', () => {
-            JazzVideoAdapter.save(app.userId, this.vid, 'reject')
+            Adapter.save(JazzVideo, app.userId, this.vid, 'reject')
             .then(() => app.renderUnseenJazzVideo())
         })
 

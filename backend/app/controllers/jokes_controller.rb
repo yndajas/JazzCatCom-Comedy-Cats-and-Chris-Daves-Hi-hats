@@ -6,6 +6,6 @@ class JokesController < ApplicationController
 
     # actually creates a UserJoke record
     def create
-        UserJoke.approve_or_reject(params[:id], params[:external_api_id], params[:approveOrReject])
+        UserJoke.approve_or_reject(params[:id], params[:identifier], params[:approveOrReject])
     end
 end

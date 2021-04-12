@@ -202,7 +202,7 @@ class App {
     }
 
     renderUnseenJazzVideo() {
-        JazzVideoAdapter.getUnseen(this.userId)
+        Adapter.getRandom(JazzVideo, this.userId)
         .then(response => response.json())
         .then(json => {
             const videoOrError = JazzVideo.randomUnseenFromJson(json);
@@ -215,7 +215,7 @@ class App {
     }
 
     renderRandomCat() {
-        CatAdapter.getRandom()
+        Adapter.getRandom(Cat)
         .then(response => response.json())
         .then(json => {
             const cat = Cat.fromJson(json);
@@ -224,7 +224,7 @@ class App {
     }
 
     renderApprovedJazzVideos() {
-        JazzVideoAdapter.getApproved(this.userId)
+        Adapter.getApproved(JazzVideo, this.userId)
         .then(response => response.json())
         .then(json => {
             const videosOrError = JazzVideo.allApprovedFromJson(json);
@@ -233,7 +233,7 @@ class App {
     }
 
     renderApprovedCats() {
-        CatAdapter.getApproved(this.userId)
+        Adapter.getApproved(Cat, this.userId)
         .then(response => response.json())
         .then(json => {
             const catsOrError = Cat.allApprovedFromJson(json);

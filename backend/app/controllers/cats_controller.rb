@@ -6,6 +6,6 @@ class CatsController < ApplicationController
 
     # actually creates a UserCat record
     def create
-        UserCat.approve_or_reject(params[:id], params[:filename], params[:approveOrReject])
+        UserCat.approve_or_reject(params[:id], params[:identifier], params[:approveOrReject])
     end
 end

@@ -3,6 +3,14 @@ class Cat {
         this.filename = filename;
     }
 
+    static get randomUrl() {
+        return "https://aws.random.cat/meow";
+    }
+
+    static get resource() {
+        return "cats";
+    }
+
     htmlElements(app, forApproval = true) {
         const div = document.createElement('div');
         div.className = 'resource-container';
@@ -26,7 +34,7 @@ class Cat {
         approveButton.className = 'btn btn-success';
         approveButton.innerText = "Meow";
         approveButton.addEventListener('click', () => {
-            CatAdapter.save(app.userId, this.filename, 'approve')
+            Adapter.save(Cat, app.userId, this.filename, 'approve')
             .then(() => app.renderRandomCat())
         })
 
@@ -35,7 +43,7 @@ class Cat {
         rejectButton.className = 'btn btn-danger';
         rejectButton.innerText = "Woof";
         rejectButton.addEventListener('click', () => {
-            CatAdapter.save(app.userId, this.filename, 'reject')
+            Adapter.save(Cat, app.userId, this.filename, 'reject')
             .then(() => app.renderRandomCat())
         })
 
