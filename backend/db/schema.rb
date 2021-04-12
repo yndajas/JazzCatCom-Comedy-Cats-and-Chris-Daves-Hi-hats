@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_184952) do
+ActiveRecord::Schema.define(version: 2021_04_12_224138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_04_12_184952) do
 
   create_table "jokes", force: :cascade do |t|
     t.integer "external_api_id"
-    t.string "type"
+    t.string "category"
     t.string "setup"
     t.string "punchline"
     t.datetime "created_at", null: false
