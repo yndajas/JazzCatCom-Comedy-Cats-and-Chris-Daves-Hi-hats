@@ -5,6 +5,10 @@ class App {
         this.backendBaseUrl = 'http://localhost:3000/';
     }
 
+    static get backendBaseUrl() {
+        return 'http://localhost:3000/';
+    }
+
     renderInitialState() {
         this.renderCopyright();
         if (this.userId) {
@@ -44,22 +48,11 @@ class App {
         })
 
         lis[0].addEventListener('click', () => this.renderImFeeling());
-        lis[1].addEventListener('click', () => {
-            JazzVideoAdapter.getApprovedVideos(this.userId)
-            .then(response => response.json())
-            .then(json => {
-                const videosOrError = JazzVideo.allApprovedFromJson(json);
-                if (typeof(videosOrError) !== 'string') {
-                    const videosHtmlElements = videosOrError.map(video => video.htmlElements(this, false));
-                    const videosOuterHtml = videosHtmlElements.map(element => element.outerHTML);
-                    const videosOuterHtmlWithBrs = videosOuterHtml.join(document.createElement('br').outerHTML);
-                    this.updateMainContentContainer(videosOuterHtmlWithBrs, 'set');
-                } else {
-                    this.updateMainContentContainer(videosOrError, 'set')
-                }
-            })
-        })
-        lis[2].addEventListener('click', () => console.log("render cats"))
+
+        lis[1].addEventListener('click', () => this.renderApprovedJazzVideos());
+
+        lis[2].addEventListener('click', () => this.renderApprovedCats());
+            
         lis[3].addEventListener('click', () => console.log("render comedy"))
 
         for (const li of lis) {
@@ -194,7 +187,7 @@ class App {
         button2.id = 'feeling-catty'
         button2.className = 'btn im-feeling';
         button2.innerText = "🐱 Catty 🐈";
-        button2.addEventListener('click', () => console.log("Catty"));
+        button2.addEventListener('click', () => this.renderRandomCat());
 
         const button3 = document.createElement('button');
         button3.id = 'feeling-jokey'
@@ -209,7 +202,7 @@ class App {
     }
 
     renderUnseenJazzVideo() {
-        JazzVideoAdapter.getUnseenVideos(this.userId)
+        JazzVideoAdapter.getUnseen(this.userId)
         .then(response => response.json())
         .then(json => {
             const videoOrError = JazzVideo.randomUnseenFromJson(json);
@@ -219,6 +212,44 @@ class App {
                 this.updateMainContentContainer(videoOrError, 'set')
             }
         })
+    }
+
+    renderRandomCat() {
+        CatAdapter.getRandom()
+        .then(response => response.json())
+        .then(json => {
+            const cat = Cat.fromJson(json);
+            this.updateMainContentContainer(cat.htmlElements(this), 'append')
+        })
+    }
+
+    renderApprovedJazzVideos() {
+        JazzVideoAdapter.getApproved(this.userId)
+        .then(response => response.json())
+        .then(json => {
+            const videosOrError = JazzVideo.allApprovedFromJson(json);
+            this.renderApprovedOrError(videosOrError);
+        })
+    }
+
+    renderApprovedCats() {
+        CatAdapter.getApproved(this.userId)
+        .then(response => response.json())
+        .then(json => {
+            const catsOrError = Cat.allApprovedFromJson(json);
+            this.renderApprovedOrError(catsOrError);
+        })
+    }
+
+    renderApprovedOrError(collectionOrError) {
+        if (typeof(collectionOrError) !== 'string') {
+            const collectionHtmlElements = collectionOrError.map(instance => instance.htmlElements(this, false));
+            const collectionOuterHtml = collectionHtmlElements.map(element => element.outerHTML);
+            const collectionOuterHtmlWithBrs = collectionOuterHtml.join(document.createElement('br').outerHTML);
+            this.updateMainContentContainer(collectionOuterHtmlWithBrs, 'set');
+        } else {
+            this.updateMainContentContainer(collectionOrError, 'set')
+        }
     }
 
     getEmailAndPassword(form) {
