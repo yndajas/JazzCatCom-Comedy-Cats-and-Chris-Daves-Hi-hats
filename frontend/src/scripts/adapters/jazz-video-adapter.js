@@ -13,14 +13,14 @@ class JazzVideoAdapter {
         return await response;
     }
 
-    static async saveVideo(userId, vid, approveOrReject) {
+    static async saveVideo(userId, jazz_video_id, approveOrReject) {
         let response = await fetch(`${JazzVideoAdapter.backendBaseUrl}users/${userId}/jazz-videos`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },        
-            body: JSON.stringify({vid, approveOrReject})
+            body: JSON.stringify({jazz_video_id, approveOrReject})
         });
         return await response;
     }
