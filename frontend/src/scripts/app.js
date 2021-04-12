@@ -181,7 +181,7 @@ class App {
         button1.id = 'feeling-jazzy'
         button1.className = 'btn im-feeling';
         button1.innerText = "🎹 Jazzy 🎷";
-        button1.addEventListener('click', () => this.renderUnseenJazzVideo());
+        button1.addEventListener('click', () => this.renderRandomJazzVideo());
         
         const button2 = document.createElement('button');
         button2.id = 'feeling-catty'
@@ -201,11 +201,11 @@ class App {
         this.updateMainContentContainer(newContent, 'append');
     }
 
-    renderUnseenJazzVideo() {
+    renderRandomJazzVideo() {
         Adapter.getRandom(JazzVideo, this.userId)
         .then(response => response.json())
         .then(json => {
-            const videoOrError = JazzVideo.randomUnseenFromJson(json);
+            const videoOrError = JazzVideo.randomFromJson(json);
             if (typeof(videoOrError) !== 'string') {
                 this.updateMainContentContainer(videoOrError.htmlElements(this), 'append');
             } else {
@@ -317,6 +317,30 @@ class App {
             spaces.push(space);
         }
         return spaces;
+    }
+
+    generateApprovalButton(approveOrReject, text, cclass, identifier) {
+        const button = document.createElement('button');
+        button.id = approveOrReject;
+        button.className = (approveOrReject === 'approve') ? 'btn btn-success' : 'btn btn-danger';
+        button.innerText = text;
+        button.addEventListener('click', () => {
+            Adapter.save(cclass, this.userId, identifier, approveOrReject)
+            .then(() => {
+                switch(cclass) {
+                    case Cat:
+                        this.renderRandomCat();
+                        break;
+                    case JazzVideo:
+                        this.renderRandomJazzVideo();
+                        break;
+                    case Joke:
+                        this.renderRandomJoke();
+                        break;
+                } 
+            })
+        })
+        return button;
     }
 }
 

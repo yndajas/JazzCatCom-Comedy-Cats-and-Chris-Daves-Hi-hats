@@ -35,24 +35,8 @@ class JazzVideo {
     }
 
     htmlElementsForApproval(div, app) {
-        const approveButton = document.createElement('button');
-        approveButton.id = 'approve'
-        approveButton.className = 'btn btn-success';
-        approveButton.innerText = "Saxy";
-        approveButton.addEventListener('click', () => {
-            Adapter.save(JazzVideo, app.userId, this.vid, 'approve')
-            .then(() => app.renderUnseenJazzVideo())
-        })
-
-        const rejectButton = document.createElement('button');
-        rejectButton.id = 'reject'
-        rejectButton.className = 'btn btn-danger';
-        rejectButton.innerText = "PiaNO thank you";
-        rejectButton.addEventListener('click', () => {
-            Adapter.save(JazzVideo, app.userId, this.vid, 'reject')
-            .then(() => app.renderUnseenJazzVideo())
-        })
-
+        const approveButton = app.generateApprovalButton('approve', "Saxy", JazzVideo, this.vid);
+        const rejectButton = app.generateApprovalButton('reject', "PiaNO thank you", JazzVideo, this.vid);
         const br = document.createElement('br');
         const spaces = App.createSpaces(1);
 
@@ -72,7 +56,7 @@ class JazzVideo {
         }
     }
 
-    static randomUnseenFromJson(json) {
+    static randomFromJson(json) {
         const count = json.data.length;
         if (count === 0) {
             return "No unseen videos";

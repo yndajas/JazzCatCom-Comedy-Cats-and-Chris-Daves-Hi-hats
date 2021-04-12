@@ -29,24 +29,8 @@ class Cat {
     }
 
     htmlElementsForApproval(div, app) {
-        const approveButton = document.createElement('button');
-        approveButton.id = 'approve'
-        approveButton.className = 'btn btn-success';
-        approveButton.innerText = "Meow";
-        approveButton.addEventListener('click', () => {
-            Adapter.save(Cat, app.userId, this.filename, 'approve')
-            .then(() => app.renderRandomCat())
-        })
-
-        const rejectButton = document.createElement('button');
-        rejectButton.id = 'reject'
-        rejectButton.className = 'btn btn-danger';
-        rejectButton.innerText = "Woof";
-        rejectButton.addEventListener('click', () => {
-            Adapter.save(Cat, app.userId, this.filename, 'reject')
-            .then(() => app.renderRandomCat())
-        })
-
+        const approveButton = app.generateApprovalButton('approve', "Meow", Cat, this.filename);
+        const rejectButton = app.generateApprovalButton('reject', "Woof", Cat, this.filename);
         const br = document.createElement('br');
         const spaces = App.createSpaces(1);
 
