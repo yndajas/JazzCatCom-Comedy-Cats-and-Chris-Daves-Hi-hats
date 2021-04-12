@@ -17,7 +17,7 @@ header {
     cursor: pointer; }
 
 main {
-  padding: 20px 0px;
+  padding: 20px 1rem;
   text-align: center; }
   main div#content {
     margin: 0 auto; }
@@ -78,9 +78,13 @@ button.im-feeling {
   button.im-feeling#feeling-jokey {
     background-color: rgba(77, 109, 180, 0.75); }
 
-div#jazz-video-container {
+div.resource-container {
   max-width: 90vh;
+  max-height: 50vh;
   margin: 0 auto; }
+  div.resource-container img {
+    max-width: 100%;
+    max-height: 50vh; }
 
 label {
   font-weight: bold; }
