@@ -50,18 +50,17 @@ class Joke {
             return "No approved jokes";
         } else {
             return json.data.map(jokeData => {
-                const {external_api_id, category, setup, punchline} = Joke.getAttributesFromJokeData(jokeData);
-                return new Cat(external_api_id, category, setup, punchline);
+                const {external_api_id, category, setup, punchline} = jokeData.attributes;
+                return new Joke(external_api_id, category, setup, punchline);
             })
         }
     }
 
     static fromJson(json) {
-        const {external_api_id, category, setup, punchline} = Joke.getAttributesFromJokeData(json);
+        const external_api_id = json.id;
+        const category = json.type;
+        const setup = json.setup;
+        const punchline = json.punchline;
         return new Joke(external_api_id, category, setup, punchline);
-    }
-
-    static getAttributesFromJokeData(jokeData) {
-        return {external_api_id: jokeData.id, category: jokeData.type, setup: jokeData.setup, punchline: jokeData.punchline};
     }
 }
