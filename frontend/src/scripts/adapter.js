@@ -16,15 +16,22 @@ class Adapter {
         return await response;
     }
 
-    static async save(cclass, userId, identifier, approveOrReject) {
+    static async save(cclass, userId, identifier, approveOrReject, additional_attributes = null) {
+        let body;
+        if (additional_attributes) {
+            body = JSON.stringify({identifier, approveOrReject, additional_attributes});
+        } else {
+            body = JSON.stringify({identifier, approveOrReject});
+        }
+
         let response = await fetch(`${App.backendBaseUrl}users/${userId}/${cclass.resource}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({identifier, approveOrReject})
-        });
+            body: body
+        });        
         return await response;
     }
 }
