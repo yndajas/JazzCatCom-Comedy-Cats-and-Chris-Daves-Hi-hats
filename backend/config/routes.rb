@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   get 'users/:id/cats' => 'cats#index'
   post 'users/:id/cats' => 'cats#create'
+
+  get 'users/:id/jokes' => 'jokes#index'
+  post 'users/:id/jokes' => 'jokes#create'
 end
