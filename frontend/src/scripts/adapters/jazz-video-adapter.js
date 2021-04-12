@@ -1,26 +1,22 @@
 class JazzVideoAdapter {
-    static get backendBaseUrl() {
-        return 'http://localhost:3000/';
-    }
-
-    static async getUnseenVideos(userId) {
-        let response = await fetch(`${JazzVideoAdapter.backendBaseUrl}users/${userId}/jazz-videos/unseen`);
+    static async getUnseen(userId) {
+        let response = await fetch(`${App.backendBaseUrl}users/${userId}/jazz-videos/unseen`);
         return await response;
     }
 
-    static async getApprovedVideos(userId) {
-        let response = await fetch(`${JazzVideoAdapter.backendBaseUrl}users/${userId}/jazz-videos`);
+    static async getApproved(userId) {
+        let response = await fetch(`${App.backendBaseUrl}users/${userId}/jazz-videos`);
         return await response;
     }
 
-    static async saveVideo(userId, jazz_video_id, approveOrReject) {
-        let response = await fetch(`${JazzVideoAdapter.backendBaseUrl}users/${userId}/jazz-videos`, {
+    static async save(userId, vid, approveOrReject) {
+        let response = await fetch(`${App.backendBaseUrl}users/${userId}/jazz-videos`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },        
-            body: JSON.stringify({jazz_video_id, approveOrReject})
+            body: JSON.stringify({vid, approveOrReject})
         });
         return await response;
     }
