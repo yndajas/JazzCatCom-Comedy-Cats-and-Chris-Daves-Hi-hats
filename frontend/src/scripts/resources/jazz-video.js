@@ -7,12 +7,11 @@ class JazzVideo {
 
     htmlElements(app, forApproval = true) {
         const div = document.createElement('div');
-        div.className = 'embed-responsive embed-responsive-16by9 iframe_container';
-        div.id = 'jazz-video-container';
+        div.className = 'embed-responsive embed-responsive-16by9 iframe_container resource-container';
 
         const iframe = document.createElement('iframe');
         iframe.className = 'embed-responsive-item';
-        iframe.setAttribute('src', `${JazzVideo.ytBaseUrl}${this.vid}`);
+        iframe.setAttribute('src', this.url);
         iframe.setAttribute('frameborder', '0');
         iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
         iframe.setAttribute('allowfullscreen', 'allowfullscreen');
@@ -33,7 +32,7 @@ class JazzVideo {
         approveButton.className = 'btn btn-success';
         approveButton.innerText = "Saxy";
         approveButton.addEventListener('click', () => {
-            JazzVideoAdapter.saveVideo(app.userId, this.id, 'approve')
+            JazzVideoAdapter.save(app.userId, this.vid, 'approve')
             .then(() => app.renderUnseenJazzVideo())
         })
 
@@ -42,7 +41,7 @@ class JazzVideo {
         rejectButton.className = 'btn btn-danger';
         rejectButton.innerText = "PiaNO thank you";
         rejectButton.addEventListener('click', () => {
-            JazzVideoAdapter.saveVideo(app.userId, this.id, 'reject')
+            JazzVideoAdapter.save(app.userId, this.vid, 'reject')
             .then(() => app.renderUnseenJazzVideo())
         })
 
@@ -59,11 +58,10 @@ class JazzVideo {
     static allApprovedFromJson(json) {
         const count = json.data.length;
         if (count === 0) {
-            return "No unseen videos";
+            return "No approved videos";
         } else {
             return json.data.map(videoData => JazzVideo.newFromVideoDataAndIncluded(videoData, json.included))
         }
-
     }
 
     static randomUnseenFromJson(json) {
