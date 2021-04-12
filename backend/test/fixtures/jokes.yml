@@ -2,12 +2,12 @@
 
 one:
   external_api_id: 1
-  type: 
+  category: 
   setup: MyString
   punchline: MyString
 
 two:
   external_api_id: 1
-  type: 
+  category: 
   setup: MyString
   punchline: MyString
