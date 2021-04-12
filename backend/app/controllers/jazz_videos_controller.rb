@@ -10,6 +10,6 @@ class JazzVideosController < ApplicationController
 
     # actually creates a UserJazzVideo record
     def create
-        UserJazzVideo.approve_or_reject(params[:id], params[:vid], params[:approveOrReject])
+        UserJazzVideo.approve_or_reject(params[:id], params[:jazz_video_id], params[:approveOrReject])
     end
 end
