@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_194929) do
+ActiveRecord::Schema.define(version: 2021_04_12_141005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,12 +21,28 @@ ActiveRecord::Schema.define(version: 2021_03_30_194929) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cats", force: :cascade do |t|
+    t.string "filename"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "jazz_videos", force: :cascade do |t|
     t.string "vid"
     t.bigint "artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_jazz_videos_on_artist_id"
+  end
+
+  create_table "user_cats", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "cat_id"
+    t.boolean "approved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cat_id"], name: "index_user_cats_on_cat_id"
+    t.index ["user_id"], name: "index_user_cats_on_user_id"
   end
 
   create_table "user_jazz_videos", force: :cascade do |t|
@@ -46,6 +62,8 @@ ActiveRecord::Schema.define(version: 2021_03_30_194929) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "user_cats", "cats"
+  add_foreign_key "user_cats", "users"
   add_foreign_key "user_jazz_videos", "jazz_videos"
   add_foreign_key "user_jazz_videos", "users"
 end
