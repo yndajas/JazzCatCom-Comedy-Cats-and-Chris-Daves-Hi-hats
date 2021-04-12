@@ -53,7 +53,7 @@ class App {
 
         lis[2].addEventListener('click', () => this.renderApprovedCats());
             
-        lis[3].addEventListener('click', () => console.log("render comedy"))
+        lis[3].addEventListener('click', () => this.renderApprovedJokes())
 
         for (const li of lis) {
             elementsContainer.append(li);
@@ -193,7 +193,7 @@ class App {
         button3.id = 'feeling-jokey'
         button3.className = 'btn im-feeling';
         button3.innerText = "😆 Jokey 😂";
-        button3.addEventListener('click', () => console.log("Jokey"));
+        button3.addEventListener('click', () => this.renderRandomJoke());
 
         const spaces = App.createSpaces(2);
 
@@ -223,6 +223,15 @@ class App {
         })
     }
 
+    renderRandomJoke() {
+        Adapter.getRandom(Joke)
+        .then(response => response.json())
+        .then(json => {
+            const joke = Joke.fromJson(json);
+            this.updateMainContentContainer(joke.htmlElements(this), 'append')
+        })
+    }
+
     renderApprovedJazzVideos() {
         Adapter.getApproved(JazzVideo, this.userId)
         .then(response => response.json())
@@ -238,6 +247,15 @@ class App {
         .then(json => {
             const catsOrError = Cat.allApprovedFromJson(json);
             this.renderApprovedOrError(catsOrError);
+        })
+    }
+
+    renderApprovedJokes() {
+        Adapter.getApproved(Joke, this.userId)
+        .then(response => response.json())
+        .then(json => {
+            const jokesOrError = Joke.allApprovedFromJson(json);
+            this.renderApprovedOrError(jokesOrError);
         })
     }
 
@@ -319,13 +337,18 @@ class App {
         return spaces;
     }
 
-    generateApprovalButton(approveOrReject, text, cclass, identifier) {
+    generateApprovalButton(approveOrReject, text, cclass, identifier, additional_attributes = null) {
         const button = document.createElement('button');
         button.id = approveOrReject;
         button.className = (approveOrReject === 'approve') ? 'btn btn-success' : 'btn btn-danger';
         button.innerText = text;
         button.addEventListener('click', () => {
-            Adapter.save(cclass, this.userId, identifier, approveOrReject)
+            let args = [cclass, this.userId, identifier, approveOrReject];
+            if (additional_attributes) {
+                args.push(additional_attributes);
+            }
+
+            Adapter.save(...args)
             .then(() => {
                 switch(cclass) {
                     case Cat:
