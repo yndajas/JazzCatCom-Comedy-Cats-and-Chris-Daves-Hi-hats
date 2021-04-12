@@ -10,6 +10,5 @@ Rails.application.routes.draw do
   post 'users/:id/jazz-videos' => 'jazz_videos#create'
 
   get 'users/:id/cats' => 'cats#index'
-  get 'users/:id/cats/random' => 'cats#index'
   post 'users/:id/cats' => 'cats#create'
 end
