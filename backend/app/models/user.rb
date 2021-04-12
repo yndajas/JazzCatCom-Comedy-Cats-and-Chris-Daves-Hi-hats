@@ -1,8 +1,10 @@
 class User < ApplicationRecord
     has_many :user_jazz_videos
     has_many :user_cats
+    has_many :user_jokes
     has_many :jazz_videos, through: :user_jazz_videos
     has_many :cats, through: :user_cats
+    has_many :jokes, through: :user_jokes
     has_secure_password
 
     def approved(resource)
