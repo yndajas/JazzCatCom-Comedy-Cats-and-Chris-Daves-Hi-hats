@@ -1,6 +1,6 @@
 module Approvable
     module ClassMethods
-        def approve_or_reject(user_id, identifier, approve_or_reject, additional_attributes = null)
+        def approve_or_reject(user_id, identifier, approve_or_reject, additional_attributes = nil)
             approved = (approve_or_reject == 'approve') ? true : false
             resource_model = self.name.gsub("User", "").constantize
             resource_instance = resource_model.find_or_initialize_by(:"#{resource_model.identifier}" => identifier)
