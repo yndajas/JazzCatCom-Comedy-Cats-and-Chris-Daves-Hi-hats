@@ -255,16 +255,26 @@ class App {
         .then(response => response.json())
         .then(json => {
             const jokesOrError = Joke.allApprovedFromJson(json);
-            this.renderApprovedOrError(jokesOrError);
+            this.renderApprovedOrError(jokesOrError, 'hr');
         })
     }
 
-    renderApprovedOrError(collectionOrError) {
+    renderApprovedOrError(collectionOrError, separator = null) {
         if (typeof(collectionOrError) !== 'string') {
             const collectionHtmlElements = collectionOrError.map(instance => instance.htmlElements(this, false));
-            const collectionOuterHtml = collectionHtmlElements.map(element => element.outerHTML);
-            const collectionOuterHtmlWithBrs = collectionOuterHtml.join(document.createElement('br').outerHTML);
-            this.updateMainContentContainer(collectionOuterHtmlWithBrs, 'set');
+
+            const collectionHtmlElementsWithBrs = [];
+            for (let i = 0; i < collectionHtmlElements.length; i++) {
+                collectionHtmlElementsWithBrs.push(collectionHtmlElements[i]);
+                if (i < collectionHtmlElements.length - 1) {
+                    collectionHtmlElementsWithBrs.push(document.createElement('br'));
+                    if (separator) {
+                        collectionHtmlElementsWithBrs.push(document.createElement(separator));
+                    }
+                }
+            }
+
+            this.updateMainContentContainer(collectionHtmlElementsWithBrs, 'append');
         } else {
             this.updateMainContentContainer(collectionOrError, 'set')
         }
