@@ -2,6 +2,7 @@ class App {
     constructor() {
         this.userId = localStorage.getItem('userId');
         this.userEmail = localStorage.getItem('userEmail');
+        this.userToken = localStorage.getItem('userToken');
     }
 
     static get backendBaseUrl() {
@@ -203,7 +204,7 @@ class App {
     }
 
     renderRandomJazzVideo() {
-        Adapter.getRandom(JazzVideo, this.userId)
+        Adapter.getRandom(this, JazzVideo, this.userId)
         .then(response => response.json())
         .then(json => {
             const videoOrError = JazzVideo.randomFromJson(json);
@@ -216,7 +217,7 @@ class App {
     }
 
     renderRandomCat() {
-        Adapter.getRandom(Cat)
+        Adapter.getRandom(this, Cat)
         .then(response => response.json())
         .then(json => {
             const cat = Cat.fromJson(json);
@@ -225,7 +226,7 @@ class App {
     }
 
     renderRandomJoke() {
-        Adapter.getRandom(Joke)
+        Adapter.getRandom(this, Joke)
         .then(response => response.json())
         .then(json => {
             const joke = Joke.fromJson(json);
@@ -234,7 +235,7 @@ class App {
     }
 
     renderApprovedJazzVideos() {
-        Adapter.getApproved(JazzVideo, this.userId)
+        Adapter.getApproved(this, JazzVideo, this.userId)
         .then(response => response.json())
         .then(json => {
             const videosOrError = JazzVideo.allApprovedFromJson(json);
@@ -243,7 +244,7 @@ class App {
     }
 
     renderApprovedCats() {
-        Adapter.getApproved(Cat, this.userId)
+        Adapter.getApproved(this, Cat, this.userId)
         .then(response => response.json())
         .then(json => {
             const catsOrError = Cat.allApprovedFromJson(json);
@@ -252,7 +253,7 @@ class App {
     }
 
     renderApprovedJokes() {
-        Adapter.getApproved(Joke, this.userId)
+        Adapter.getApproved(this, Joke, this.userId)
         .then(response => response.json())
         .then(json => {
             const jokesOrError = Joke.allApprovedFromJson(json);
@@ -313,29 +314,23 @@ class App {
             } else {
                 this.userId = json.user.id;
                 this.userEmail = json.user.email;
+                this.userToken = json.user.token;
                 localStorage.setItem('userId', this.userId);
                 localStorage.setItem('userEmail', this.userEmail);
+                localStorage.setItem('userToken', this.userToken);
                 this.renderLoggedInElements();
             }
         })
     }
 
     logOut() {
-        fetch(`${App.backendBaseUrl}sessions`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => {
-            localStorage.removeItem('userId');
-            localStorage.removeItem('userEmail');
-            this.user = null;
-            this.removeNavElements();
-            this.removeUserInfo();
-            this.renderLoggedOutElements();
-        })
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userToken');
+        this.user = null;
+        this.removeNavElements();
+        this.removeUserInfo();
+        this.renderLoggedOutElements();
     }
 
     static createSpaces(n) {
@@ -354,7 +349,7 @@ class App {
         button.className = (approveOrReject === 'approve') ? 'btn btn-success' : 'btn btn-danger';
         button.innerText = text;
         button.addEventListener('click', () => {
-            let args = [cclass, this.userId, identifier, approveOrReject];
+            let args = [this, cclass, this.userId, identifier, approveOrReject];
             if (additional_attributes) {
                 args.push(additional_attributes);
             }
