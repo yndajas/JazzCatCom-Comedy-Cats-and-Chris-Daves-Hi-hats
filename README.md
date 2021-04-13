@@ -1,4 +1,4 @@
-<img src="src/images/favicon/mstile-150x150.png" alt="app icon" title="app icon" style="width:70px">
+<img src="src/images/favicon/android-chrome-192x192.png" alt="app icon" title="app icon" width="70px">
 
 # JazzCatCom: Comedy, Cats and Chris Dave's Hi-Hats
 A simple application for discovering and saving jazz, cats and comedy!
