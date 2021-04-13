@@ -22,10 +22,30 @@ class Joke {
         const div = document.createElement('div');
         div.className = 'resource-container';
 
-        const p = document.createElement('p');
-        p.innerText = `${this.category} ${this.setup} ${this.punchline}`;
+        const divSetup = document.createElement('div');
+        divSetup.className = 'joke-setup';
 
-        div.append(p);
+        const b = document.createElement('b');
+        b.innerText = `${this.setup}`;
+
+        divSetup.append(b);
+        
+        const divPunchline = document.createElement('div');
+        divPunchline.className = 'joke-punchline';
+
+        const buttonRevealPunchline = document.createElement('button');
+        buttonRevealPunchline.className = 'reveal-punchline'
+        buttonRevealPunchline.className = 'btn btn-primary';
+        buttonRevealPunchline.innerText = "Reveal punchline";
+        buttonRevealPunchline.addEventListener('click', () => {
+            divPunchline.innerText = `${this.punchline}`;
+        });
+
+        divPunchline.append(buttonRevealPunchline);
+
+        const br = document.createElement('br');
+        
+        div.append(divSetup, br, divPunchline);
 
         if (forApproval) {
             return this.htmlElementsForApproval(div, app);
