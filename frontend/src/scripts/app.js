@@ -2,7 +2,6 @@ class App {
     constructor() {
         this.userId = localStorage.getItem('userId');
         this.userEmail = localStorage.getItem('userEmail');
-        this.backendBaseUrl = 'http://localhost:3000/';
     }
 
     static get backendBaseUrl() {
@@ -297,7 +296,7 @@ class App {
 
     logInOrRegister(action, form) {
         const path = (action === 'register') ? 'users' : 'sessions';
-        fetch(`${this.backendBaseUrl}${path}`, {
+        fetch(`${App.backendBaseUrl}${path}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -320,7 +319,7 @@ class App {
     }
 
     logOut() {
-        fetch(`${this.backendBaseUrl}sessions`, {
+        fetch(`${App.backendBaseUrl}sessions`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
