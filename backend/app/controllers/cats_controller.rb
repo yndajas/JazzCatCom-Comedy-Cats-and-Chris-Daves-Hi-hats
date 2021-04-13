@@ -1,4 +1,6 @@
 class CatsController < ApplicationController
+    before_action :render_error_if_user_mismatch
+    
     def index
         cats = Cat.get(params[:id], request.path.downcase)
         render json: CatSerializer.new(cats)

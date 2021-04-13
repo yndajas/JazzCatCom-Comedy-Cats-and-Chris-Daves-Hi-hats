@@ -1,4 +1,6 @@
 class JokesController < ApplicationController
+    before_action :render_error_if_user_mismatch
+
     def index
         jokes = Joke.get(params[:id], request.path.downcase)
         render json: JokeSerializer.new(jokes)

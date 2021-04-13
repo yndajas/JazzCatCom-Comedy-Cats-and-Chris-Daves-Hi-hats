@@ -1,4 +1,6 @@
 class JazzVideosController < ApplicationController
+    before_action :render_error_if_user_mismatch
+
     def index
         videos = JazzVideo.get(params[:id], request.path.downcase)
 
