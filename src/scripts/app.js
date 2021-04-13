@@ -12,6 +12,7 @@ class App {
     }
 
     renderInitialState() {
+        this.addNavbarBrandListener();
         this.renderCopyright();
         if (this.userId) {
             this.renderLoggedInElements();
@@ -30,6 +31,11 @@ class App {
     renderLoggedOutElements() {
         this.renderSessionControlForm();
         this.renderAbout();
+    }
+
+    addNavbarBrandListener() {
+        const navbarBrand = document.querySelector('span.navbar-brand.h1');
+        navbarBrand.addEventListener('click', () => this.renderAbout());
     }
 
     getNavElements() {
@@ -170,7 +176,65 @@ class App {
     }
 
     renderAbout() {
-        this.updateMainContentContainer("About", 'set');
+        const div = document.createElement('div');
+        div.id = 'about';
+
+        const h3About = document.createElement('h3');
+        h3About.innerText = "About";
+
+        const p1 = document.createElement('p');
+        p1.innerText = "JazzCatCom: Comedy, Cats and Chris Dave's Hi-hats is a simple application for discovering and saving jazz, cats and comedy!";
+
+        const p2 = document.createElement('p');
+        p2.innerText = "With JazzCatCom, you can find new jazz videos, cat images/GIFs and jokes, and save them to your collection for future enjoyment.";
+
+        const p3 = document.createElement('p');
+
+        const aDemo = document.createElement('a');
+        aDemo.href = "LINKPLACEHOLDER";
+        aDemo.innerText = "short demo on YouTube";
+        aDemo.setAttribute('target', '_blank');
+
+        p3.append("You can view a ", aDemo, ".");
+
+        const h3CreatorGitHub = document.createElement('h3');
+        h3CreatorGitHub.innerText = "Creator and GitHub repository";
+
+        const ul = document.createElement('ul');
+
+        const li1 = document.createElement('li');
+
+        const aThey = document.createElement('a');
+        aThey.href = 'https://pronoun.is/they/.../themself';
+        aThey.innerText = "they";
+        aThey.setAttribute('target', '_blank');
+
+        const aCreatorGitHub = document.createElement('a');
+        aCreatorGitHub.href = 'https://github.com/yndajas';
+        aCreatorGitHub.innerText = "GitHub";
+        aCreatorGitHub.setAttribute('target', '_blank');
+
+        const aWebsite = document.createElement('a');
+        aWebsite.href = 'https://yndajas.co';
+        aWebsite.innerText = "website";
+        aWebsite.setAttribute('target', '_blank');
+
+        li1.append("Ynda Jas (", aThey, "): ", aCreatorGitHub, " | ", aWebsite);
+
+        const li2 = document.createElement('li');
+
+        const aRepositoryGitHub = document.createElement('a');
+        aRepositoryGitHub.href = 'https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-Hats';
+        aRepositoryGitHub.innerText = "GitHub respository";
+        aRepositoryGitHub.setAttribute('target', '_blank');
+
+        li2.append(aRepositoryGitHub);
+
+        ul.append(li1, li2);
+
+        div.append(h3About, p1, p2, p3, h3CreatorGitHub, ul);
+        
+        this.updateMainContentContainer(div, 'append');
     }
 
     renderImFeeling() {        
