@@ -1,22 +1,33 @@
 class Adapter {
-    static async getRandom(cclass, userId = null) {
-        let url;
+    static async getRandom(app, cclass, userId = null) {
+        let args = []
         if (cclass === JazzVideo) {
-            url = cclass.randomUrl(userId);
+            args.push(cclass.randomUrl(userId));
+            args.push({
+                method: 'GET',
+                headers: {
+                    token: app.userToken
+                }
+            })
         } else {
-            url = cclass.randomUrl;
+            args.push(cclass.randomUrl);
         }
 
-        let response = await fetch(url);
+        let response = await fetch(...args);
         return await response;
     }
 
-    static async getApproved(cclass, userId) {
-        let response = await fetch(`${App.backendBaseUrl}users/${userId}/${cclass.resource}`);
+    static async getApproved(app, cclass, userId) {
+        let response = await fetch(`${App.backendBaseUrl}users/${userId}/${cclass.resource}`, {
+            method: 'GET',
+            headers: {
+                token: app.userToken   
+            }
+        });
         return await response;
     }
 
-    static async save(cclass, userId, identifier, approveOrReject, additional_attributes = null) {
+    static async save(app, cclass, userId, identifier, approveOrReject, additional_attributes = null) {
         let body;
         if (additional_attributes) {
             body = JSON.stringify({identifier, approveOrReject, additional_attributes});
@@ -28,7 +39,8 @@ class Adapter {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                token: app.userToken 
             },
             body: body
         });        
