@@ -5,7 +5,9 @@ class App {
     }
 
     static get backendBaseUrl() {
-        return 'http://localhost:3000/';
+        const url = "https://jazzcatcom.herokuapp.com/";
+        // const url = "http://localhost:3000/" // for local use
+        return url;
     }
 
     renderInitialState() {
