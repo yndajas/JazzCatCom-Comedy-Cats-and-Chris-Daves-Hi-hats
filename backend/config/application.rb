@@ -41,9 +41,5 @@ module Backend
           :max_age => 0
       end
     end
-
-    # add sessions support
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore  
   end
 end
