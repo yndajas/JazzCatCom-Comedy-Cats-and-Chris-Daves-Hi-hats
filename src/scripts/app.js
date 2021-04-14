@@ -224,7 +224,7 @@ class App {
         const li2 = document.createElement('li');
 
         const aRepositoryGitHub = document.createElement('a');
-        aRepositoryGitHub.href = 'https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-Hats';
+        aRepositoryGitHub.href = 'https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats';
         aRepositoryGitHub.innerText = "GitHub respository";
         aRepositoryGitHub.setAttribute('target', '_blank');
 

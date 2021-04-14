@@ -1,6 +1,6 @@
 <img src="src/images/favicon/android-chrome-192x192.png" alt="app icon" title="app icon" width="70px">
 
-# JazzCatCom: Comedy, Cats and Chris Dave's Hi-Hats
+# JazzCatCom: Comedy, Cats and Chris Dave's Hi-hats
 A simple application for discovering and saving jazz, cats and comedy!
 
 With JazzCatCom, you can find new jazz videos, cat images/GIFs and jokes, and save them to your collection for future enjoyment.
@@ -21,7 +21,7 @@ The following instructions are for Windows Subsystem for Linux/Ubuntu, but it's 
 
 Install Ruby (<a href="https://www.ruby-lang.org/en/documentation/installation" target="_blank" title="Ruby installation">help</a>), then in a terminal:
 1. `gem install bundler`
-2. change directory to JazzCatcome (e.g. `cd /mnt/c/Users/yndaj/Documents/GitHub/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-Hats`, replacing the path with wherever you've downloaded/moved the repository)
+2. change directory to JazzCatcome (e.g. `cd /mnt/c/Users/yndaj/Documents/GitHub/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats`, replacing the path with wherever you've downloaded/moved the repository)
 3. `bundle install`
 4. if you don't have PostgreSQL installed: `sudo apt-get install postgresql`
 5. `sudo service postgresql start` (if you get an error saying a user doesn't exist, try the following first, changing '<USERNAME>' to the username mentioned in the error: `sudo -u postgres createuser --superuser <USERNAME>`)
@@ -32,7 +32,7 @@ Install Ruby (<a href="https://www.ruby-lang.org/en/documentation/installation" 
 You can use the frontend locally with the live/deployed frontend if you, but you can't use the local backend with the live/deployed frontend. Follow the steps below according to how you wish to run the repository locally.
 
 #### Load up the backend server
-In a terminal, from the 'JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-Hats' directory:
+In a terminal, from the 'JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats' directory:
 1. `cd backend`
 2. `rails s`
 3. go to 'src/scripts/app.js' and comment out the first line below `static get backendBaseUrl() {`, then uncomment the line below that (comments in JavaScript are lines of code prefixed `//`), so that the active line of code is pointing to 'http://localhost:3000/'
@@ -47,7 +47,7 @@ or:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-Hats](https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-Hats).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats](https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats).
 
 ## Licence
 
