@@ -5,7 +5,7 @@ A simple application for discovering and saving jazz, cats and comedy!
 
 With JazzCatCom, you can find new jazz videos, cat images/GIFs and jokes, and save them to your collection for future enjoyment.
 
-You can view a demo of the app over on YouTube: <a href="https://www.youtube.com/watch?v=PYwX1QGj6os" target="_blank" title="app demo on YouTube">youtube.com/watch?v=PYwX1QGj6os</a>. PLACEHOLDER - TO BE UPDATED
+You can view a demo of the app over on YouTube: <a href="https://www.youtube.com/watch?v=x-QS4K6tN78" target="_blank" title="app demo on YouTube">youtube.com/watch?v=x-QS4K6tN78</a>.
 
 ## Online use
 

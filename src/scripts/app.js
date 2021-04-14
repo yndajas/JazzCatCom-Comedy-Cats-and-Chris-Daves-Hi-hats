@@ -191,7 +191,7 @@ class App {
         const p3 = document.createElement('p');
 
         const aDemo = document.createElement('a');
-        aDemo.href = "LINKPLACEHOLDER";
+        aDemo.href = "https://www.youtube.com/watch?v=x-QS4K6tN78";
         aDemo.innerText = "short demo on YouTube";
         aDemo.setAttribute('target', '_blank');
 
