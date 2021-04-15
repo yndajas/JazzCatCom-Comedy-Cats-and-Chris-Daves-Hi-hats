@@ -34,7 +34,6 @@ class Joke {
         divPunchline.className = 'joke-punchline';
 
         const buttonRevealPunchline = document.createElement('button');
-        buttonRevealPunchline.className = 'reveal-punchline'
         buttonRevealPunchline.className = 'btn btn-primary';
         buttonRevealPunchline.innerText = "Reveal punchline";
         buttonRevealPunchline.addEventListener('click', () => {
