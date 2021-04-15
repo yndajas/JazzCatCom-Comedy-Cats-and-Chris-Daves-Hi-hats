@@ -1,6 +1,6 @@
 class Adapter {
     static async getRandom(app, cclass, userId = null) {
-        let args = []
+        const args = [];
         if (cclass === JazzVideo) {
             args.push(cclass.randomUrl(userId));
             args.push({
