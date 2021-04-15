@@ -6,7 +6,6 @@ $base-jazz: rgba(210, 46, 41, 0.75);
 $base-cat: rgba(247, 144, 30, 0.75);
 $base-comedy: rgba(77, 109, 180, 0.75);
 
-
 html {
     position: relative;
     min-height: 100%;
@@ -136,9 +135,4 @@ div.resource-container {
         max-width: 100%;
         max-height: 50vh;
     }
-}
-
-// check what this is for
-label {
-    font-weight: bold;
 }
