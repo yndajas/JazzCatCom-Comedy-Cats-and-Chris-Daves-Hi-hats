@@ -61,7 +61,7 @@ class App {
 
         lis[2].addEventListener('click', () => this.renderApprovedCats());
             
-        lis[3].addEventListener('click', () => this.renderApprovedJokes())
+        lis[3].addEventListener('click', () => this.renderApprovedJokes());
 
         for (const li of lis) {
             elementsContainer.append(li);
@@ -82,7 +82,7 @@ class App {
 
         const form = document.createElement('form');
         form.id = 'session-control';
-        form.addEventListener('submit', (e) => e.preventDefault())
+        form.addEventListener('submit', (e) => e.preventDefault());
 
         const emailInput = document.createElement('input');
         emailInput.setAttribute('type', 'email');
@@ -116,7 +116,7 @@ class App {
         const container = this.getSessionControlContainer();
 
         const button = document.createElement('button');
-        button.id = 'log-out'
+        button.id = 'log-out';
         button.innerText = 'Log out';
         button.className = 'btn btn-primary';
         button.addEventListener('click', () => this.logOut());
@@ -152,7 +152,7 @@ class App {
         const span = document.createElement('span');
         span.className = 'navbar-text';
         const year = new Date().getFullYear();
-        span.innerText = `© Ynda Jas ${year}`
+        span.innerText = `© Ynda Jas ${year}`;
         li.append(span);
         container.append(li);
     }
@@ -244,19 +244,19 @@ class App {
         const br = document.createElement('br');
 
         const button1 = document.createElement('button');
-        button1.id = 'feeling-jazzy'
+        button1.id = 'feeling-jazzy';
         button1.className = 'btn im-feeling';
         button1.innerText = "🎹 Jazzy 🎷";
         button1.addEventListener('click', () => this.renderRandomJazzVideo());
         
         const button2 = document.createElement('button');
-        button2.id = 'feeling-catty'
+        button2.id = 'feeling-catty';
         button2.className = 'btn im-feeling';
         button2.innerText = "🐱 Catty 🐈";
         button2.addEventListener('click', () => this.renderRandomCat());
 
         const button3 = document.createElement('button');
-        button3.id = 'feeling-jokey'
+        button3.id = 'feeling-jokey';
         button3.className = 'btn im-feeling';
         button3.innerText = "😆 Jokey 😂";
         button3.addEventListener('click', () => this.renderRandomJoke());
@@ -275,7 +275,7 @@ class App {
             if (typeof(videoOrError) !== 'string') {
                 this.updateMainContentContainer(videoOrError.htmlElements(this), 'append');
             } else {
-                this.updateMainContentContainer(videoOrError, 'set')
+                this.updateMainContentContainer(videoOrError, 'set');
             }
         })
     }
@@ -285,7 +285,7 @@ class App {
         .then(response => response.json())
         .then(json => {
             const cat = Cat.fromJson(json);
-            this.updateMainContentContainer(cat.htmlElements(this), 'append')
+            this.updateMainContentContainer(cat.htmlElements(this), 'append');
         })
     }
 
@@ -294,7 +294,7 @@ class App {
         .then(response => response.json())
         .then(json => {
             const joke = Joke.fromJson(json);
-            this.updateMainContentContainer(joke.htmlElements(this), 'append')
+            this.updateMainContentContainer(joke.htmlElements(this), 'append');
         })
     }
 
@@ -342,7 +342,7 @@ class App {
 
             this.updateMainContentContainer(collectionHtmlElementsWithBrs, 'append');
         } else {
-            this.updateMainContentContainer(collectionOrError, 'set')
+            this.updateMainContentContainer(collectionOrError, 'set');
         }
     }
 
@@ -368,7 +368,7 @@ class App {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            },        
+            },
             body: JSON.stringify(this.getEmailAndPassword(form))
         })
         .then(response => response.json())

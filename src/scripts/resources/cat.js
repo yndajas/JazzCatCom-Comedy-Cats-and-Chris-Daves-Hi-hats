@@ -24,7 +24,7 @@ class Cat {
             return this.htmlElementsForApproval(div, app);
         } else {
             return div;
-            // might want to add a delete button here (and refactor into a deparate method if so)
+            // might want to add a delete button here (and refactor into a separate method if so)
         }
     }
 
@@ -38,7 +38,7 @@ class Cat {
     }
 
     get url() {
-        return `https://purr.objects-us-east-1.dream.io/i/${this.filename}`
+        return `https://purr.objects-us-east-1.dream.io/i/${this.filename}`;
     }
 
     static allApprovedFromJson(json) {
@@ -46,7 +46,7 @@ class Cat {
         if (count === 0) {
             return "No approved cats";
         } else {
-            return json.data.map(catData => new Cat(catData.attributes.filename))
+            return json.data.map(catData => new Cat(catData.attributes.filename));
         }
     }
 

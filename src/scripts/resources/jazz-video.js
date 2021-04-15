@@ -44,7 +44,7 @@ class JazzVideo {
     }
 
     get url() {
-        return `${JazzVideo.ytBaseUrl}${this.vid}`
+        return `${JazzVideo.ytBaseUrl}${this.vid}`;
     }
 
     static allApprovedFromJson(json) {
@@ -52,7 +52,7 @@ class JazzVideo {
         if (count === 0) {
             return "No approved videos";
         } else {
-            return json.data.map(videoData => JazzVideo.newFromVideoDataAndIncluded(videoData, json.included))
+            return json.data.map(videoData => JazzVideo.newFromVideoDataAndIncluded(videoData, json.included));
         }
     }
 
