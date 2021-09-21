@@ -29,7 +29,7 @@ Install Ruby (<a href="https://www.ruby-lang.org/en/documentation/installation" 
 
 ### Usage
 
-You can use the frontend locally with the live/deployed frontend if you, but you can't use the local backend with the live/deployed frontend. Follow the steps below according to how you wish to run the repository locally.
+You can use the frontend locally with the live/deployed frontend if you prefer, but you can't use the local backend with the live/deployed frontend. Follow the steps below according to how you wish to run the repository locally.
 
 #### Load up the backend server
 In a terminal, from the 'JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats' directory:
