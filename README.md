@@ -21,7 +21,7 @@ The following instructions are for Windows Subsystem for Linux/Ubuntu, but it's 
 
 Install Ruby (<a href="https://www.ruby-lang.org/en/documentation/installation" target="_blank" title="Ruby installation">help</a>), then in a terminal:
 1. `gem install bundler`
-2. change directory to JazzCatcome (e.g. `cd /mnt/c/Users/yndaj/Documents/GitHub/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats`, replacing the path with wherever you've downloaded/moved the repository)
+2. change directory to JazzCatCom (e.g. `cd /mnt/c/Users/yndaj/Documents/GitHub/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats`, replacing the path with wherever you've downloaded/moved the repository)
 3. `bundle install`
 4. if you don't have PostgreSQL installed: `sudo apt-get install postgresql`
 5. `sudo service postgresql start` (if you get an error saying a user doesn't exist, try the following first, changing '<USERNAME>' to the username mentioned in the error: `sudo -u postgres createuser --superuser <USERNAME>`)
