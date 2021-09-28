@@ -7,6 +7,8 @@ With JazzCatCom, you can find new jazz videos, cat images/GIFs and jokes, and sa
 
 You can view a demo of the app over on YouTube: <a href="https://www.youtube.com/watch?v=x-QS4K6tN78" target="_blank" title="app demo on YouTube">youtube.com/watch?v=x-QS4K6tN78</a>.
 
+[![YouTube demo](https://img.youtube.com/vi/x-QS4K6tN78/maxresdefault.jpg)](http://www.youtube.com/watch?v=x-QS4K6tN78)
+
 ## Online use
 
 The app is available to use for free at <a href="http://jazzcatcom.yndajas.co">jazzcatcom.yndajas.co</a> (link will redirect to GitHub)!
