@@ -49,7 +49,7 @@ or:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats](https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats).
+Bug reports and pull requests are welcome on GitHub at [github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats](https://github.com/yndajas/JazzCatCom-Comedy-Cats-and-Chris-Daves-Hi-hats).
 
 ## Licence
 
